@@ -190,6 +190,11 @@ tr.key td{background:var(--signal-soft)}
 .ask p{color:var(--on-deep-2);max-width:62ch;font-size:1.1rem}
 .ask ul{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:8px 0 0}
 .ask li{border:1px solid rgba(241,240,251,.3);border-radius:999px;padding:6px 14px;font-size:.92rem}
+.contact{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:18px;padding-top:22px;border-top:1px solid rgba(241,240,251,.2)}
+.contact .eyebrow{flex-basis:100%}
+.contact a{font-family:var(--mono);font-size:clamp(1.05rem,3.6vw,1.4rem);color:var(--on-deep);text-underline-offset:5px;overflow-wrap:anywhere;user-select:all}
+.contact button{font:inherit;font-size:.9rem;color:var(--on-deep);background:transparent;border:1px solid rgba(241,240,251,.45);border-radius:999px;padding:6px 14px;cursor:pointer}
+.contact button:hover{background:rgba(241,240,251,.12)}
 footer .wrap{padding-block:26px;font-size:.85rem;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 </style>
 
@@ -206,7 +211,7 @@ footer .wrap{padding-block:26px;font-size:.85rem;color:var(--ink-3);display:flex
     <p class="eyebrow">Frailty screening · Abu Dhabi</p>
     <h1 style="margin-top:14px">Catching frailty <em>before</em> it becomes a fall.</h1>
     <p class="lede">FrailTriage turns the 2-minute Timed Up &amp; Go walk test into an early-warning system. One sensor on the lower back picks up the movement changes a stopwatch misses.</p>
-    <p class="byline">By Baizak &amp; Mouad</p>
+    <p class="byline">By Baizak &amp; Mouad · Khalifa University, Abu Dhabi</p>
   </div>
 
   <figure class="course" style="margin:0">
@@ -357,10 +362,15 @@ footer .wrap{padding-block:26px;font-size:.85rem;color:var(--ink-3);display:flex
   <h2>Help us run the Abu Dhabi pilot.</h2>
   <p>We are looking for investment or a research partnership to fund multi-site validation and build a certified screening device.</p>
   <ul><li>Investors</li><li>Hospitals and clinics</li><li>Elder-care providers</li><li>Research groups</li></ul>
+  <div class="contact">
+    <span class="eyebrow">Contact</span>
+    <a id="mail" href="mailto:100069385@ku.ac.ae">100069385@ku.ac.ae</a>
+    <button type="button" id="copyMail">Copy address</button>
+  </div>
 </div></section>
 </main>
 
-<footer><div class="wrap"><span>FrailTriage · Baizak &amp; Mouad</span><span>Research prototype. Not a certified medical device.</span></div></footer>
+<footer><div class="wrap"><span>FrailTriage · Baizak &amp; Mouad · Khalifa University</span><span>Research prototype. Not a certified medical device.</span></div></footer>
 
 <script>
 (function(){
@@ -394,6 +404,14 @@ footer .wrap{padding-block:26px;font-size:.85rem;color:var(--ink-3);display:flex
       tip.style.left=Math.max(0,l)+"px";tip.style.top=(e.clientY-b.top+14)+"px";
     });
     c.addEventListener("pointerleave",function(){tip.hidden=true});
+  });
+
+  // copy contact address
+  var cb=document.getElementById("copyMail"),ma=document.getElementById("mail");
+  cb.addEventListener("click",function(){
+    var done=function(){cb.textContent="Copied";setTimeout(function(){cb.textContent="Copy address"},1800)};
+    var sel=function(){var r=document.createRange();r.selectNodeContents(ma);var s=getSelection();s.removeAllRanges();s.addRange(r);cb.textContent="Selected, press copy"};
+    try{navigator.clipboard.writeText(ma.textContent).then(done,sel)}catch(e){sel()}
   });
 
   // 1 in 8
